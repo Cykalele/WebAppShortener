@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9ad43888-aaa8-4167-9813-3afbc564cf49/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/CCShortener",
+    "appService.deploySubpath": "."
+}
