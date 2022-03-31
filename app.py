@@ -1,7 +1,6 @@
-import requests
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-
+import requests
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
