@@ -2,6 +2,7 @@ from datetime import datetime
 from distutils.log import debug
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import requests
+import os
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
@@ -18,6 +19,10 @@ def send_form():
         
     return render_template('post.html')
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 '''
 @app.route('/hello', methods=['POST'])
 def hello():
