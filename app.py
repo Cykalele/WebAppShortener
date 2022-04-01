@@ -9,7 +9,7 @@ app = Flask(__name__, static_url_path="", static_folder="static")
 @app.route("/")
 def home():
     return render_template('index.html')
-
+'''
 @app.route("/", methods=['POST'])
 def send_form():
     if request.method == "POST":
@@ -23,7 +23,7 @@ def send_form():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
-'''
+
 @app.route('/hello', methods=['POST'])
 def hello():
    name = request.form.get('name')
