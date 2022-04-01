@@ -1,8 +1,7 @@
 from datetime import datetime
 from distutils.log import debug
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import requests
-import os
+
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
