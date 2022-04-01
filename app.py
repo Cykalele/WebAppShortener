@@ -1,14 +1,17 @@
+from logging import FileHandler,WARNING
 from datetime import datetime
 from distutils.log import debug
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
 
 app = Flask(__name__, static_url_path="", static_folder="static")
+file_handler = FileHandler('errorlog.txt')
+file_handler.setLevel(WARNING)
 
 @app.route("/")
 def home():
     return render_template('index.html')
-'''
+
 @app.route("/", methods=['POST'])
 def send_form():
     if request.method == "POST":
@@ -17,7 +20,7 @@ def send_form():
         requests.post(HTTP_LOGIC_APP, json={"long_url": long_url})
         
     return render_template('post.html')
-
+'''
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
