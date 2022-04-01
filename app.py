@@ -1,8 +1,9 @@
 from logging import FileHandler,WARNING
+import requests
 from datetime import datetime
 from distutils.log import debug
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import requests
+
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 file_handler = FileHandler('errorlog.txt')
