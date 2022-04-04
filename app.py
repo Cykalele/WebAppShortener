@@ -29,6 +29,7 @@ def receive_response():
         if (content_type == 'application/json'):
             response_json = request.get_json()
             print( "Received HTTP Request")
+            print(response_json)
             return response_json
 '''
 @app.route('/', methods=['POST'])
