@@ -32,11 +32,10 @@ def receive_response():
         content_type = request.headers.get('Content-Type')
         if (content_type == 'application/json'):
             response_json = request.get_json()
-            json_object = json.dumps(response_json)
+            json_object = json.loads(response_json)
             #longURL = json_object["long_url"]
             print( "Received HTTP Request")
-            print(json_object)
-            print(json_object["long_url"])
+            print(json_object['long_url'])
             return render_template('index.html', long_url="Test")
 
 '''
