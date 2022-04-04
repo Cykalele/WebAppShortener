@@ -13,6 +13,8 @@ file_handler.setLevel(WARNING)
 @app.route("/")
 def home():
     return render_template('index.html')
+
+@app.route("/", methods=['POST'])
 def send_form():
     id = random.randint(9999, 999999)
     long_url = request.form.get("long_url")
