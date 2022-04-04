@@ -1,5 +1,6 @@
 from logging import FileHandler,WARNING
 import random
+import string
 import requests
 from datetime import datetime
 from distutils.log import debug
@@ -20,7 +21,7 @@ def send_form():
     long_url = request.form.get("long_url")
     HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
     requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
-    print("OUTGOING-- " + id + " --" + long_url)
+    print("OUTGOING-- " + str(id) + " --" + long_url)
     return render_template('index.html')
 
 @app.route("/api/receive", methods=['POST'])
