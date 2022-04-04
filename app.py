@@ -1,4 +1,5 @@
 from logging import FileHandler,WARNING
+import random
 import requests
 from datetime import datetime
 from distutils.log import debug
@@ -12,23 +13,17 @@ file_handler.setLevel(WARNING)
 @app.route("/")
 def home():
     return render_template('index.html')
-
-@app.route("/", methods=['POST'])
 def send_form():
-    if request.method == "POST":
-        long_url = request.form.get("long_url")
-        HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
-        requests.post(HTTP_LOGIC_APP, json={"long_url": long_url})
-        content_type = request.headers.get('Content-Type')
-        if (content_type == 'application/json'):
-            response_json = request.get_json()
-            print( "Received HTTP Request")
-            print(response_json)
-            return response_json
+    id = random.randint(9999, 999999)
+    long_url = request.form.get("long_url")
+    HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
+    requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
+       
     return render_template('index.html')
-    
+
+
 '''
-@app.route("/", methods=['POST'])
+@app.route("/receive", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
         content_type = request.headers.get('Content-Type')
@@ -37,7 +32,7 @@ def receive_response():
             print( "Received HTTP Request")
             print(response_json)
             return response_json
-
+'''
 @app.route('/', methods=['POST'])
 def result():
     print(request.form['foo']) # should display 'bar'
