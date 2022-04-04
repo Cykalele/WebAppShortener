@@ -26,17 +26,18 @@ def send_form():
     print("OUTGOING-- " + str_id+ " --" + long_url)
     return render_template('index.html')
 
-@app.route("/api/receive", methods=['POST'])
+@app.route("/api/receive.json", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
         content_type = request.headers.get('Content-Type')
         if (content_type == 'application/json'):
-            response_json = request.get_json()
-            json_object = json.loads(response_json)
-            #longURL = json_object["long_url"]
+            response_json = request.json
             print( "Received HTTP Request")
-            print(json_object['long_url'])
-            return render_template('index.html', long_url="Test")
+            print(response_json['long_url'])
+            #json_object = json.dumps(response_json)
+            #longURL = json_object["long_url"]
+            #print(json_object)
+            return render_template('index.html', long_url=response_json['long_url'])
 
 '''
 @app.route('/', methods=['POST'])
