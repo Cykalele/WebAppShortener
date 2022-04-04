@@ -20,8 +20,22 @@ def send_form():
         HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
         requests.post(HTTP_LOGIC_APP, json={"long_url": long_url})
         
-    return render_template('post.html')
+    return render_template('index.html')
+
+@app.route("/receive", methods=['POST'])
+def receive_response():  
+    if request.method == "POST":
+        content_type = request.headers.get('Content-Type')
+        if (content_type == 'application/json'):
+            response_json = request.get_json()
+            print( "Received HTTP Request")
+            return response_json
 '''
+@app.route('/', methods=['POST'])
+def result():
+    print(request.form['foo']) # should display 'bar'
+    return 'Received !' # response to your request.
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
