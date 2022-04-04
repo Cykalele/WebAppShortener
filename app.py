@@ -24,6 +24,7 @@ def send_form():
     requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
     str_id = f'{id}'
     print("OUTGOING-- " + str_id+ " --" + long_url)
+    return render_template('index.html')
 
 @app.route("/api/receive", methods=['POST'])
 def receive_response():  
@@ -32,10 +33,11 @@ def receive_response():
         if (content_type == 'application/json'):
             response_json = request.get_json()
             json_object = json.dumps(response_json)
+            #longURL = json_object["long_url"]
             print( "Received HTTP Request")
-            print(response_json)
+            print(json_object)
             print(json_object["long_url"])
-            return render_template('index.html', long_url=json_object["long_url"])
+            return render_template('index.html', long_url="Test")
 
 '''
 @app.route('/', methods=['POST'])
