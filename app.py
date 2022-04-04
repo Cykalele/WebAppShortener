@@ -14,7 +14,7 @@ file_handler.setLevel(WARNING)
 def home():
     return render_template('index.html')
 
-@app.route("/", methods=['POST'])
+@app.route("/")
 def send_form():
     id = random.randint(9999, 999999)
     long_url = request.form.get("long_url")
@@ -34,7 +34,7 @@ def receive_response():
             print( "Received HTTP Request")
             print(response_json)
             return response_json
-'''
+
 @app.route('/', methods=['POST'])
 def result():
     print(request.form['foo']) # should display 'bar'
