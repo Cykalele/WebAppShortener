@@ -15,7 +15,7 @@ file_handler.setLevel(WARNING)
 def home():
     return render_template('index.html')
 
-@app.route("/sent", methods=['POST'])
+@app.route("/sent/", methods=['POST'])
 def send_form():
     id = random.randint(9999, 999999)
     long_url = request.form.get("long_url")
@@ -26,6 +26,7 @@ def send_form():
     print(sent_request.status_code)
     return render_template('index.html', mylong_url=sent_request.text)
 
+'''
 @app.route("/api/receive/", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
@@ -40,7 +41,7 @@ def receive_response():
         return "ACCESS NOT ALLOWED"
     return "ACCESS NOT ALLOWED"
 
-'''
+
 @app.route("/api/receive/", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
