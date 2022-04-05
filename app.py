@@ -24,7 +24,7 @@ def send_form():
     str_id = f'{id}'
     response_body = sent_request.json()
     requested_long_url = response_body['long_url']
-    if( sent_request.status_code == 301):
+    if( sent_request.status_code == 202):
         if (id == response_body['id']):
             print("---------------------")
             print("INCOME: IDs are equal")
