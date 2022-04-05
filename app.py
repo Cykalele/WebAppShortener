@@ -22,12 +22,19 @@ def send_form():
     HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
     sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
     str_id = f'{id}'
-    print("OUTGOING-- " + str_id+ " --" + long_url)
-    print(sent_request.status_code)
-    print(sent_request.text)
-    return render_template('index.html', mylong_url=sent_request.text)
+    response_body = sent_request.json()
+    requested_long_url = response_body['long_url']
+    if (id == response_body['id']):
+        print("---------------------")
+        print("INCOME: IDs are equal")
+        print("URL: " + requested_long_url)
+        print("---------------------")
+        return render_template('index.html', mylong_url=requested_long_url)
+    else:
+        return render_template('index.html')  
 
 
+'''
 @app.route("/api/receive", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
@@ -42,7 +49,6 @@ def receive_response():
         return "ACCESS NOT ALLOWED"
     return "ACCESS NOT ALLOWED"
 
-'''
 @app.route("/api/receive/", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
