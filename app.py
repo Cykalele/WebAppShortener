@@ -1,7 +1,6 @@
 import json
 from logging import FileHandler,WARNING
 import random
-import string
 import requests
 from datetime import datetime
 from distutils.log import debug
@@ -26,7 +25,7 @@ def send_form():
     print("OUTGOING-- " + str_id+ " --" + long_url)
     return render_template('index.html')
 
-@app.route("/api/receive.json", methods=['POST'])
+@app.route("/api/receive", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
         content_type = request.headers.get('Content-Type')
@@ -37,6 +36,8 @@ def receive_response():
             received_long_url = response_json['long_url']
             return redirect(url_for('index.html', long_url=received_long_url))
             #render_template('index.html', long_url=received_long_url)
+        return "ACCESS NOT ALLOWED"
+    return "ACCESS NOT ALLOWED"
 
 '''
 @app.route('/', methods=['POST'])
