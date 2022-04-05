@@ -26,8 +26,8 @@ def send_form():
     print(sent_request.status_code)
     return render_template('index.html', mylong_url=sent_request.text)
 
-'''
-@app.route("/api/receive/", methods=['POST'])
+
+@app.route("/api/receive", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
         content_type = request.headers.get('Content-Type')
@@ -41,7 +41,7 @@ def receive_response():
         return "ACCESS NOT ALLOWED"
     return "ACCESS NOT ALLOWED"
 
-
+'''
 @app.route("/api/receive/", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
