@@ -21,11 +21,10 @@ def send_form():
     long_url = request.form.get("long_url")
     HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
     sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
-    str_id = f'{id}'
     response_body = sent_request.json()
-    requested_long_url = response_body['long_url']
     if( sent_request.status_code == 202):
         if (id == response_body['id']):
+            requested_long_url = response_body['long_url']
             print("---------------------")
             print("INCOME: IDs are equal")
             print("URL: " + requested_long_url)
@@ -35,11 +34,12 @@ def send_form():
             return render_template('index.html')  
     elif( sent_request.status_code == 201):
         if (id == response_body['id']):
+            requested_short_url = response_body['short_url']
             print("---------------------")
             print("INCOME: IDs are equal")
-            print("URL: " + response_body['short_url'])
+            print("URL: " + requested_short_url)
             print("---------------------")
-            return render_template('index.html', success_short_url=response_body['short_url'])
+            return render_template('index.html', success_short_url=requested_short_url)
         else:
             return render_template('index.html')  
 
