@@ -38,7 +38,7 @@
 					<P class="mb-5">A cloud computing based URL Shortener, that helps you remembering every link!</P>
 					
                     <form action="{{ url_for('send_form') }}" method="post" class="subscribe-form">
-               	    	<div class="row form-section">
+               	    	<div class="row form-section" style="margin-bottom: 0px;">
 
 							<div class="col-md-7 col-sm-7 col-xs-7">
 			                      <input name="long_url" type="text" class="form-control" id="long_url" placeholder="Enter your URL to be shortened..." required/>
@@ -46,7 +46,6 @@
 							<div class="col-md-5 col-sm-5 col-xs-5">
 								<button type="submit" class="tm-btn-subscribe">Shorten</button>
 							</div>
-						
 						</div>
                     </form>
 					{% if error_url %}
