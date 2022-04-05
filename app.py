@@ -24,6 +24,7 @@ def send_form():
     str_id = f'{id}'
     print("OUTGOING-- " + str_id+ " --" + long_url)
     print(sent_request.status_code)
+    print(sent_request.text)
     return render_template('index.html', mylong_url=sent_request.text)
 
 
