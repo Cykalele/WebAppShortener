@@ -29,7 +29,7 @@ def send_form():
         print("INCOME: IDs are equal")
         print("URL: " + requested_long_url)
         print("---------------------")
-        return render_template('index.html', mylong_url=requested_long_url)
+        return render_template('index.html', error_url=requested_long_url)
     else:
         return render_template('index.html')  
 
