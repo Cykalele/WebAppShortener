@@ -23,25 +23,9 @@ def send_form():
     sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
     str_id = f'{id}'
     print("OUTGOING-- " + str_id+ " --" + long_url)
-    print(sent_request.text)
+    print(sent_request.status_code)
     return render_template('index.html', mylong_url=sent_request.text)
 
-
-@app.route("/api/receive", methods=['GET'])
-def receive_response():  
-    if request.method == "GET":
-        content_type = request.headers.get('Content-Type')
-        if (content_type == 'application/json'):
-            response_json = request.json
-            print( "Received HTTP Request")
-            print(response_json['long_url'])
-            received_long_url = response_json['long_url']
-            #return redirect(url_for('index.html', long_url=received_long_url))
-            return render_template('index.html', mylong_url=received_long_url)
-        return "ACCESS NOT ALLOWED"
-    return "ACCESS NOT ALLOWED"
-
-'''
 @app.route("/api/receive/", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
@@ -56,7 +40,7 @@ def receive_response():
         return "ACCESS NOT ALLOWED"
     return "ACCESS NOT ALLOWED"
 
-
+'''
 @app.route('/', methods=['POST'])
 def result():
     print(request.form['foo']) # should display 'bar'
