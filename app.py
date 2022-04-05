@@ -33,6 +33,8 @@ def send_form():
             return render_template('index.html', error_url=requested_long_url)
         else:
             return render_template('index.html')  
+    
+'''
     elif( sent_request.status_code == 901):
         if (id == response_body['id']):
             print("---------------------")
@@ -43,7 +45,6 @@ def send_form():
         else:
             return render_template('index.html')  
 
-'''
 @app.route("/api/receive", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
