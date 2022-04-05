@@ -15,17 +15,18 @@ file_handler.setLevel(WARNING)
 def home():
     return render_template('index.html')
 
-@app.route("/", methods=['POST'])
+@app.route("/sent", methods=['POST'])
 def send_form():
     id = random.randint(9999, 999999)
     long_url = request.form.get("long_url")
     HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
-    requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
+    sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
     str_id = f'{id}'
     print("OUTGOING-- " + str_id+ " --" + long_url)
-    return render_template('index.html')
+    print(sent_request.text)
+    return render_template('index.html', mylong_url=sent_request.text)
 
-@app.route("/api/receive", methods=['POST'])
+@app.route("/api/receive/", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
         content_type = request.headers.get('Content-Type')
@@ -34,8 +35,8 @@ def receive_response():
             print( "Received HTTP Request")
             print(response_json['long_url'])
             received_long_url = response_json['long_url']
-            return redirect(url_for('index.html', long_url=received_long_url))
-            #render_template('index.html', long_url=received_long_url)
+            #return redirect(url_for('index.html', long_url=received_long_url))
+            return render_template('index.html', mylong_url=received_long_url)
         return "ACCESS NOT ALLOWED"
     return "ACCESS NOT ALLOWED"
 
