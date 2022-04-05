@@ -51,9 +51,10 @@
                     </form>
 					{% if mylong_url %}
 					<div class="container">
-						
-						<P class="mb-5">YOUR REQUEST FAILED: <b>"{{ mylong_url }}"</b> IS NOT A VALID URL!</P>
-						
+						<div class="alert alert-danger" role="alert">
+							<P class="mb-5">REQUEST FAILED:
+							<b>{{ mylong_url }}</b> is not a valid URL!</P>
+						</div>						
 					</div>
 					{% endif %}
 
