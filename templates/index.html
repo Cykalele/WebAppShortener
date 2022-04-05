@@ -55,6 +55,13 @@
 					</div>
 					{% endif %}
 
+					{% if success_short_url %}
+					<div class="alert alert-success alert-dismissible" style="width: 80%">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>{{ success_short_url }}</strong> is your shortened link!
+					</div>
+					{% endif %}
+
 					</div>
 				</div>	
 				

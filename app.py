@@ -24,15 +24,24 @@ def send_form():
     str_id = f'{id}'
     response_body = sent_request.json()
     requested_long_url = response_body['long_url']
-    if (id == response_body['id']):
-        print("---------------------")
-        print("INCOME: IDs are equal")
-        print("URL: " + requested_long_url)
-        print("---------------------")
-        return render_template('index.html', error_url=requested_long_url)
-    else:
-        return render_template('index.html')  
-
+    if( sent_request.status_code == 601):
+        if (id == response_body['id']):
+            print("---------------------")
+            print("INCOME: IDs are equal")
+            print("URL: " + requested_long_url)
+            print("---------------------")
+            return render_template('index.html', error_url=requested_long_url)
+        else:
+            return render_template('index.html')  
+    elif( sent_request.status_code == 901):
+        if (id == response_body['id']):
+            print("---------------------")
+            print("INCOME: IDs are equal")
+            print("URL: " + requested_long_url)
+            print("---------------------")
+            return render_template('index.html', error_url=requested_long_url)
+        else:
+            return render_template('index.html')  
 
 '''
 @app.route("/api/receive", methods=['POST'])
