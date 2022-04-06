@@ -24,8 +24,8 @@ def send_form():
     response_body = sent_request.json()
     
     if (id == response_body['id']):
+        requested_long_url = response_body['long_url']
         if(response_body['status'] == "invalid"):
-            requested_long_url = response_body['long_url']
             print("---------------------")
             print("INCOME: IDs are equal")
             print("URL: " + requested_long_url)
@@ -37,23 +37,11 @@ def send_form():
             print("INCOME: IDs are equal")
             print("URL: " + requested_short_url)
             print("---------------------")
-            return render_template('index.html', success_short_url=requested_short_url)
-
+            return render_template('index.html', success_short_url=requested_short_url, long_url = requested_long_url)
     else:
         return render_template('index.html')  
+
 '''
-    elif( sent_request.status_code == 201):
-        if (id == response_body['id']):
-            requested_short_url = response_body['short_url']
-            print("---------------------")
-            print("INCOME: IDs are equal")
-            print("URL: " + requested_short_url)
-            print("---------------------")
-            return render_template('index.html', success_short_url=requested_short_url)
-        else:
-            return render_template('index.html')  
-
-
 @app.route("/api/receive", methods=['POST'])
 def receive_response():  
     if request.method == "POST":
@@ -68,26 +56,6 @@ def receive_response():
         return "ACCESS NOT ALLOWED"
     return "ACCESS NOT ALLOWED"
 
-@app.route('/', methods=['POST'])
-def result():
-    print(request.form['foo']) # should display 'bar'
-    return 'Received !' # response to your request.
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-@app.route('/hello', methods=['POST'])
-def hello():
-   name = request.form.get('name')
-
-   if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name)
-   else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
 '''
 
 if __name__ == '__main__':

@@ -56,10 +56,24 @@
 					{% endif %}
 
 					{% if success_short_url %}
-					<div class="alert alert-success alert-dismissible" style="width: 80%">
+					<table class="table table-striped table-responsive">
+						<thead>
+							<tr>
+								<th>Full URL</th>
+								<th>Short URL</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a href={{long_url}}>{{long_url}}</a></td>
+								<td> <a href={{success_short_url}}>{{success_short_url}}</a></td>
+							</tr>
+						</tbody>
+					</table>
+					<!--<div class="alert alert-success alert-dismissible" style="width: 80%">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 						<strong>{{ success_short_url }}</strong> is your shortened link!
-					</div>
+					</div>-->
 					{% endif %}
 
 					</div>
@@ -67,11 +81,11 @@
 				
 			</div>	
 	</body>
-	<footer>
+	<!--<footer>
 		<div class="footer-link">
 			<p>Copyright © 2022 Thomas Hauser</p>
 		</div>
-	</footer>
+	</footer>-->
 
 	<script type="text/javascript" src="{{ url_for('static',filename='js/app.js') }}"></script>
 	<script type="text/javascript" src="{{ url_for('static',filename='js/particles.js') }}"></script>
