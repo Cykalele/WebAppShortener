@@ -34,51 +34,51 @@
 			<div class="container-fluid">
 				<div class="row cb-slideshow-text-container ">
 					<div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
-					<header class="mb-5"><h1>APP SHORTENER</h1></header>
-					<P class="mb-5">A cloud computing based URL Shortener, that helps you remembering every link!</P>
-					<P class="mb-5">Just type in your long URL in the following box.</P>
-					
-                    <form action="{{ url_for('send_form') }}" method="post" class="subscribe-form">
-               	    	<div class="row form-section" style="margin-bottom: 6%;">
+						<header class="mb-5"><h1>APP SHORTENER</h1></header>
+						<P class="mb-5">A cloud computing based URL Shortener, that helps you remembering every link!</P>
 
-							<div class="col-md-7 col-sm-7 col-xs-7">
-			                      <input name="long_url" type="text" class="form-control" id="long_url" placeholder="Enter your URL to be shortened..." required/>
-				  			</div>
-							<div class="col-md-5 col-sm-5 col-xs-5">
-								<button type="submit" class="tm-btn-subscribe">Shorten</button>
+                    	<form action="{{ url_for('send_form') }}" method="post" class="subscribe-form">
+							<div class="row form-section" style="margin-bottom: 6%;">
+
+								<div class="col-md-7 col-sm-7 col-xs-7">
+									<input name="long_url" type="text" class="form-control" id="long_url" placeholder="Enter your URL to be shortened..." required/>
+								</div>
+								<div class="col-md-5 col-sm-5 col-xs-5">
+									<button type="submit" class="tm-btn-subscribe">Shorten</button>
+								</div>
 							</div>
+						</form>
+						{% if error_url %}
+						<div class="alert alert-danger alert-dismissible" style="width: 80%">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>{{ error_url }}</strong> is not a valid URL!
 						</div>
-                    </form>
-					{% if error_url %}
-					<div class="alert alert-danger alert-dismissible" style="width: 80%">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>{{ error_url }}</strong> is not a valid URL!
-					</div>
-					{% endif %}
+						{% endif %}
 
+					</div>
 					{% if success_short_url %}
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<table class="table table-striped table-responsive">
-							<thead class="thead-dark">
-								<tr>
-									<th>SHORT URL</th>
-									<th>LONG URL</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td> <a href={{success_short_url}}>{{success_short_url}}</a></td>
-									<td><a href={{long_url}}>{{long_url}}</a></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!--<div class="alert alert-success alert-dismissible" style="width: 80%">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>{{ success_short_url }}</strong> is your shortened link!
-					</div>-->
-					{% endif %}
-
+					<div class="container">
+						<div class="col-12 col-md-12 col-sm-12 col-xs-12">
+							<table class="table table-striped table-responsive">
+								<thead class="thead-dark">
+									<tr>
+										<th>SHORT URL</th>
+										<th>LONG URL</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td> <a href={{success_short_url}}>{{success_short_url}}</a></td>
+										<td><a href={{long_url}}>{{long_url}}</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!--<div class="alert alert-success alert-dismissible" style="width: 80%">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+							<strong>{{ success_short_url }}</strong> is your shortened link!
+						</div>-->
+						{% endif %}
 					</div>
 				</div>	
 				
