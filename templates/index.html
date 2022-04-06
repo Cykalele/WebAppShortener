@@ -54,12 +54,12 @@
 							<strong>{{ error_url }}</strong> is not a valid URL!
 						</div>
 						{% endif %}
-						
+
 						{% if success_short_url %}
 						<div class="alert alert-success alert-dismissible" style="width: 80%">
 							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							<strong>{{ success_short_url }}</strong> is your shortened URL! <br>
-							Inititial URL: {{ long_url }}
+							<strong>SHORT URL: </strong><a href="{{ success_short_url }}">{{ success_short_url }}</a><br>
+							<strong>LONG URL: </strong> <a href="{{ long_url }}">{{ long_url }}</a>
 						</div>
 						{% endif %}
 					</div>	
