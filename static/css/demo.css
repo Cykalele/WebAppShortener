@@ -63,8 +63,12 @@ body{
 	overflow:hidden;
 }
 a{
-	color: #333;
+	color: rgb(62, 87, 36);
 	text-decoration: none;
+}
+
+a:hover{
+	color: rgb(43, 63, 23);
 }
 .container{
 	position: relative;	
