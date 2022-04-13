@@ -45,7 +45,7 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/short/<shortcode>", methods=['GET'])
+@app.route("/<shortcode>", methods=['GET'])
 def redirect(shortcode):
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
     port = 10255
@@ -71,7 +71,7 @@ def redirect(shortcode):
         url_json = entry['long_url']
         print(url_json)
         longURLstring = str(url_json)
-        return render_template('post.html', shortcode=longURLstring)
+        return redirect(longURLstring)
     except:
         return render_template('post.html', shortcode="ENTRY NOT FOUND")
 
