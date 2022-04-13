@@ -19,8 +19,12 @@ def home():
 def send_form():
     id = random.randint(9999, 999999)
     long_url = request.form.get("long_url")
-    HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
-    sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
+    #HTTP_LOGIC_APP = "https://prod-02.northcentralus.logic.azure.com:443/workflows/472d520b360c4f8e8a0bb6f0ed0af76f/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=UQ76AMjGyzFqjZHTlIUybvYqDZMKJQnozAnDexjUXvY"
+    API_URL = "https://api-appshortener.azure-api.net/LogicAppAPI/sendFormData"
+    header = {"Ocp-Apim-Subscription-Key": "9a056297fa0f4d44ad5a6b3febf5c4fc"}
+    sent_request = requests.post(API_URL, headers=header, json={"long_url": long_url, "id": id})
+    
+    #sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
     response_body = sent_request.json()
     
     if (id == response_body['id']):
@@ -42,19 +46,14 @@ def send_form():
         return render_template('index.html')  
 
 '''
-@app.route("/api/receive", methods=['POST'])
+@app.route("/redirect/")
 def receive_response():  
-    if request.method == "POST":
-        content_type = request.headers.get('Content-Type')
-        if (content_type == 'application/json'):
-            response_json = request.json
-            print( "Received HTTP Request")
-            print(response_json['long_url'])
-            received_long_url = response_json['long_url']
-            #return redirect(url_for('index.html', long_url=received_long_url))
-            return render_template('index.html', mylong_url=received_long_url)
-        return "ACCESS NOT ALLOWED"
-    return "ACCESS NOT ALLOWED"
+    response_json = request.json
+    print( "Received HTTP Request")
+    print(response_json['long_url'])
+    received_long_url = response_json['long_url']
+    #return redirect(url_for('index.html', long_url=received_long_url))
+    return render_template('index.html', mylong_url=received_long_url)
 
 '''
 
