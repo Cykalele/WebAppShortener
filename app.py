@@ -66,9 +66,9 @@ def redirect(shortcode):
     collection = db[mycollection]
     print("Connected to collection")
     try:
-        entry = collection.find({}, {'_id': shortcode})
-        for data in entry:
-            return render_template('post.html', shortcode=data)
+        entry = collection.find_one({'_id': shortcode})
+        longURLVal = entry['long_url']
+        return render_template('post.html', shortcode=longURLVal)
     except:
         return render_template('post.html', shortcode="ENTRY NOT FOUND")
 
