@@ -46,7 +46,7 @@ def send_form():
 
 @app.route("/short/")
 def redirect():
-    return "REDIRECT WORKED!"
+    return render_template('post.html')
 '''
 @app.route("/redirect/")
 def receive_response():  
