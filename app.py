@@ -44,9 +44,10 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/short/")
-def redirect():
+@app.route("/short/<shortcode>", methods=['GET'])
+def redirect(shortcode):
     return render_template('post.html')
+
 '''
 @app.route("/redirect/")
 def receive_response():  
