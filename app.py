@@ -1,4 +1,5 @@
 import json
+from urllib.parse import urlunparse
 import pymongo
 from logging import FileHandler,WARNING
 import random
@@ -71,7 +72,7 @@ def redirect(shortcode):
         url_json = entry['long_url']
         print(url_json)
         longURLstring = str(url_json)
-        return render_template('post.html', shortcode=longURLstring)
+        return redirect(urlunparse(longURLstring))
     except:
         return render_template('post.html', shortcode="ENTRY NOT FOUND")
 
