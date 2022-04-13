@@ -46,7 +46,7 @@ def send_form():
 
 @app.route("/short/<shortcode>", methods=['GET'])
 def redirect(shortcode):
-    return render_template('post.html')
+    return render_template('post.html', shortcode=shortcode)
 
 '''
 @app.route("/redirect/")
