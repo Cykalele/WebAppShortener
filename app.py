@@ -44,7 +44,7 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/short")
+@app.route("/short/")
 def redirect():
     return "REDIRECT WORKED!"
 '''
