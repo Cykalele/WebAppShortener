@@ -1,4 +1,5 @@
 import json
+import pymongo
 from logging import FileHandler,WARNING
 import random
 import requests
@@ -46,7 +47,29 @@ def send_form():
 
 @app.route("/short/<shortcode>", methods=['GET'])
 def redirect(shortcode):
-    return render_template('post.html', shortcode=shortcode)
+    host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
+    port = 10255
+    mydatabase = 'DB_URLSHORTENER'
+    mycollection = 'url_matching'
+
+    try:
+        connect = pymongo.MongoClient(host)
+        print("Connected successfully!!!")
+    except:
+        print("Could not connect to MongoDB")
+
+    # connecting or switching to the database
+    db = connect[mydatabase]
+    print("Connected to database")
+
+    # creating or switching to demoCollection
+    collection = db[mycollection]
+    print("Connected to collection")
+    try:
+        entry = collection.find({}, {'_id': shortcode})
+        return render_template('post.html', shortcode=entry)
+    except:
+        return render_template('post.html', shortcode="ENTRY NOT FOUND")
 
 '''
 @app.route("/redirect/")
