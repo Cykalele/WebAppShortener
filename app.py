@@ -74,7 +74,7 @@ def redirect(shortcode):
         print(url_json)
         longURLstring = str(url_json)
         print(type(longURLstring))
-        return render_template('post.html', shortcode=longURLstring)
+        return redirect("https://www.instagram.com/?hl=de")
     except:
         return render_template('post.html', shortcode="ENTRY NOT FOUND")
 
