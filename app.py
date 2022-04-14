@@ -63,7 +63,10 @@ def redirect(shortcode):
     print("Connected to database")
     collection = db[mycollection]
     print("Connected to collection")
+    cursor = collection.find({'_id': shortcode}, {'long_url': 1})
     
+    return render_template('post.html', shortcode=cursor)
+   
 
 if __name__ == '__main__':
     app.run()
