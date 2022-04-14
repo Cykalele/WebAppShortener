@@ -73,14 +73,13 @@ def redirect(shortcode):
         print("---------------------")
         print("URL HAS BEEN FOUND")
         print(url_json)
-        print("---------------------")
-        if (entry['long_url'] is not None):
-            return redirect(entry['long_url'])
-        else:
-            return render_template('post.html', shortcode=str(ex))       
+        print("---------------------")     
     except Exception as ex:
-        print(ex)
-        return render_template('post.html', shortcode=str(ex))       
+        return render_template('post.html', shortcode=str(ex))
 
+    if (entry['long_url'] is not None):
+        return redirect(entry['long_url'])
+    else:
+        return render_template('post.html', shortcode=str(type(url_json)))  
 if __name__ == '__main__':
     app.run()
