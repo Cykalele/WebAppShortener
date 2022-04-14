@@ -65,9 +65,8 @@ def redirect(shortcode):
     print("Connected to collection")
     print(shortcode)
     querystring = {'_id': shortcode}
-    entry = collection.find(querystring)
-    for x in entry:
-        print(x)
+    entry = collection.find_one(querystring)
+    print(entry)
     #if (entry['long_url'] is not None):
         #return redirect(entry['long_url'])
     #else:
