@@ -14,19 +14,6 @@ app = Flask(__name__, static_url_path="", static_folder="static")
 file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
 
-host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
-port = 10255
-mydatabase = 'DB_URLSHORTENER'
-mycollection = 'url_matching'
-try:
-    connect = pymongo.MongoClient(host)
-    print("Connected successfully!!!")
-except:
-    print("Could not connect to MongoDB")
-db = connect[mydatabase]
-print("Connected to database")
-collection = db[mycollection]
-print("Connected to collection")
 
 @app.route("/")
 def home():
@@ -63,15 +50,25 @@ def send_form():
 
 @app.route("/<shortcode>")
 def redirect(shortcode): 
-    entry = collection.find_one({'_id': shortcode})
-    return redirect(entry['long_url'])
-    #print("---------------------")
-    #print("URL HAS BEEN FOUND")
-    #print("---------------------")     
-    #if (url_json is not None):
-        #return redirect(url_json)
-    #else:
-        #return render_template('post.html', shortcode="Something went wrong")  
+    host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
+    port = 10255
+    mydatabase = 'DB_URLSHORTENER'
+    mycollection = 'url_matching'
+    try:
+        connect = pymongo.MongoClient(host)
+        print("Connected successfully!!!")
+    except:
+        print("Could not connect to MongoDB")
+    db = connect[mydatabase]
+    print("Connected to database")
+    collection = db[mycollection]
+    print("Connected to collection")
+    querystring = {'_id': shortcode}
+    entry = collection.find(querystring)
+    if (entry['long_url'] is not None):
+        return redirect(entry['long_url'])
+    else:
+        return render_template('post.html', shortcode="Something went wrong")  
 
 if __name__ == '__main__':
     app.run()
