@@ -73,7 +73,7 @@ def redirect(shortcode):
         url_json = entry['long_url']
         print(url_json)
         #longURLstring = str(url_json)    
-        return redirect(url_json, 302)
+        return redirect(url_json)
     except Exception as ex:
         print(ex)
         return render_template('post.html', shortcode=str(ex))
