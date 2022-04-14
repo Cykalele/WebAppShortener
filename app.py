@@ -47,7 +47,7 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/<shortcode>", methods=['GET'])
+@app.route("/<shortcode>")
 def redirect(shortcode):
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
     port = 10255
@@ -72,9 +72,8 @@ def redirect(shortcode):
         print(entry)
         url_json = entry['long_url']
         print(url_json)
-        longURLstring = str(url_json)
-        print(type(longURLstring))
-        return redirect("https://www.instagram.com/?hl=de")
+        #longURLstring = str(url_json)    
+        return redirect(url_json, 302)
     except Exception as ex:
         print(ex)
         return render_template('post.html', shortcode=str(ex))
