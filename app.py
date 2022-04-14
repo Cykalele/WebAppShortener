@@ -47,13 +47,9 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/<shortcode>")
-def redirect(shortcode):
-    long_url_from_db = getDataFromDB(shortcode)
-    print(type(long_url_from_db))
-    #longURLstring = str(url_json)    
-    return redirect(long_url_from_db)
-def getDataFromDB(shortcode):
+@app.route("/<shortcode>", methods=['GET'])
+def redirect(shortcode): 
+
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
     port = 10255
     mydatabase = 'DB_URLSHORTENER'
@@ -76,21 +72,10 @@ def getDataFromDB(shortcode):
         print("URL HAS BEEN FOUND")
         print(url_json)
         print("---------------------")
-        return url_json
+        return redirect(url_json)
     except Exception as ex:
         print(ex)
         return render_template('post.html', shortcode=str(ex))       
-'''
-@app.route("/redirect/")
-def receive_response():  
-    response_json = request.json
-    print( "Received HTTP Request")
-    print(response_json['long_url'])
-    received_long_url = response_json['long_url']
-    #return redirect(url_for('index.html', long_url=received_long_url))
-    return render_template('index.html', mylong_url=received_long_url)
-
-'''
 
 if __name__ == '__main__':
     app.run()
