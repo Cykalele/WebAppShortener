@@ -14,6 +14,20 @@ app = Flask(__name__, static_url_path="", static_folder="static")
 file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
 
+host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
+port = 10255
+mydatabase = 'DB_URLSHORTENER'
+mycollection = 'url_matching'
+try:
+    connect = pymongo.MongoClient(host)
+    print("Connected successfully!!!")
+except:
+    print("Could not connect to MongoDB")
+db = connect[mydatabase]
+print("Connected to database")
+collection = db[mycollection]
+print("Connected to collection")
+
 @app.route("/")
 def home():
     return render_template('index.html')
@@ -47,39 +61,20 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/<shortcode>", methods=['GET'])
+@app.route("/<shortcode>")
 def redirect(shortcode): 
-
-    host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
-    port = 10255
-    mydatabase = 'DB_URLSHORTENER'
-    mycollection = 'url_matching'
-
-    try:
-        connect = pymongo.MongoClient(host)
-        print("Connected successfully!!!")
-    except:
-        print("Could not connect to MongoDB")
-
-    db = connect[mydatabase]
-    print("Connected to database")
-    collection = db[mycollection]
-    print("Connected to collection")
-    try:
-        entry = collection.find_one({'_id': shortcode})
-        print(type(entry))
-        url_json = entry['long_url']
-        print(type(url_json))
-        print("---------------------")
-        print("URL HAS BEEN FOUND")
-        print(url_json)
-        print("---------------------")     
-    except Exception as ex:
-        return render_template('post.html', shortcode=str(ex))
-
+    entry = collection.find_one({'_id': shortcode})
+    print(type(entry))
+    url_json = entry['long_url']
+    print(type(url_json))
+    print("---------------------")
+    print("URL HAS BEEN FOUND")
+    print(url_json)
+    print("---------------------")     
     if (entry['long_url'] is not None):
         return redirect(entry['long_url'])
     else:
-        return render_template('post.html', shortcode=str(type(url_json)))  
+        return render_template('post.html', shortcode="Something went wrong")  
+
 if __name__ == '__main__':
     app.run()
