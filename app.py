@@ -49,6 +49,12 @@ def send_form():
 
 @app.route("/<shortcode>")
 def redirect(shortcode):
+    long_url_from_db = getDataFromDB(shortcode)
+    #longURLstring = str(url_json)    
+    return redirect(long_url_from_db)
+
+
+def getDataFromDB(shortcode):
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
     port = 10255
     mydatabase = 'DB_URLSHORTENER'
@@ -60,24 +66,21 @@ def redirect(shortcode):
     except:
         print("Could not connect to MongoDB")
 
-    # connecting or switching to the database
     db = connect[mydatabase]
     print("Connected to database")
-
-    # creating or switching to demoCollection
     collection = db[mycollection]
     print("Connected to collection")
     try:
         entry = collection.find_one({'_id': shortcode})
-        print(entry)
         url_json = entry['long_url']
+        print("---------------------")
+        print("URL HAS BEEN FOUND")
         print(url_json)
-        #longURLstring = str(url_json)    
-        return redirect(url_json)
+        print("---------------------")
+        return url_json
     except Exception as ex:
         print(ex)
-        return render_template('post.html', shortcode=str(ex))
-
+        return render_template('post.html', shortcode=str(ex))       
 '''
 @app.route("/redirect/")
 def receive_response():  
