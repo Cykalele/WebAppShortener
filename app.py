@@ -50,6 +50,7 @@ def send_form():
 @app.route("/<shortcode>")
 def redirect(shortcode):
     long_url_from_db = getDataFromDB(shortcode)
+    print(type(long_url_from_db))
     #longURLstring = str(url_json)    
     return redirect(long_url_from_db)
 
