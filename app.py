@@ -75,8 +75,9 @@ def redirect(shortcode):
         longURLstring = str(url_json)
         print(type(longURLstring))
         return redirect("https://www.instagram.com/?hl=de")
-    except:
-        return render_template('post.html', shortcode="ENTRY NOT FOUND")
+    except Exception as ex:
+        print(ex)
+        return render_template('post.html', shortcode=str(ex))
 
 '''
 @app.route("/redirect/")
