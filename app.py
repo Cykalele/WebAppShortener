@@ -53,8 +53,6 @@ def redirect(shortcode):
     print(type(long_url_from_db))
     #longURLstring = str(url_json)    
     return redirect(long_url_from_db)
-
-
 def getDataFromDB(shortcode):
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
     port = 10255
