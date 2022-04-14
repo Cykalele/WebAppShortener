@@ -64,11 +64,13 @@ def redirect(shortcode):
     collection = db[mycollection]
     print("Connected to collection")
     querystring = {'_id': shortcode}
-    entry = collection.find(querystring)
-    if (entry['long_url'] is not None):
-        return redirect(entry['long_url'])
-    else:
-        return render_template('post.html', shortcode="Something went wrong")  
+    entry = collection.find({}, querystring)
+    for x in entry:
+        print(x)
+    #if (entry['long_url'] is not None):
+        #return redirect(entry['long_url'])
+    #else:
+        #return render_template('post.html', shortcode="Something went wrong")  
 
 if __name__ == '__main__':
     app.run()
