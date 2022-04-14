@@ -67,12 +67,17 @@ def redirect(shortcode):
     print("Connected to collection")
     try:
         entry = collection.find_one({'_id': shortcode})
+        print(type(entry))
         url_json = entry['long_url']
+        print(type(url_json))
         print("---------------------")
         print("URL HAS BEEN FOUND")
         print(url_json)
         print("---------------------")
-        return redirect(url_json)
+        if (entry['long_url'] is not None):
+            return redirect(entry['long_url'])
+        else:
+            return render_template('post.html', shortcode=str(ex))       
     except Exception as ex:
         print(ex)
         return render_template('post.html', shortcode=str(ex))       
