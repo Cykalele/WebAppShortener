@@ -67,10 +67,12 @@ def redirect(shortcode):
     cursor = collection.find({'_id': shortcode}, {'long_url': 1})
     for doc in cursor:      
         print(type(doc['long_url'])) 
-        return render_template('post.html', shortcode=doc['long_url'])
+        redirect("https://www.instagram.com/?hl=de")
+        return
+        #return render_template('post.html', shortcode=doc['long_url'])
     #except Exception as e:
         #return render_template('post.html', shortcode=e)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
