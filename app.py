@@ -65,7 +65,8 @@ def redirect(shortcode):
     print("Connected to collection")
     
     cursor = collection.find({'_id': shortcode}, {'long_url': 1})
-    for doc in cursor:       
+    for doc in cursor:      
+        print(type(doc['long_url'])) 
         return render_template('post.html', shortcode=doc['long_url'])
     #except Exception as e:
         #return render_template('post.html', shortcode=e)
