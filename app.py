@@ -1,4 +1,5 @@
 import json
+from urllib import response
 from urllib.parse import urlunparse
 from urllib. request import urlopen
 import pymongo
@@ -48,8 +49,8 @@ def send_form():
     else:
         return render_template('index.html')  
 
-@app.route("/<shortcode>")
-def redirect(shortcode): 
+@app.route("/<shortcode>", methods=['GET'])
+def router(shortcode): 
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
     port = 10255
     mydatabase = 'DB_URLSHORTENER'
@@ -67,8 +68,8 @@ def redirect(shortcode):
     cursor = collection.find({'_id': shortcode}, {'long_url': 1})
     for doc in cursor:      
         print(type(doc['long_url'])) 
-        redirect("https://www.instagram.com/?hl=de")
-        return
+        return redirect(doc['long_url'])
+    return
         #return render_template('post.html', shortcode=doc['long_url'])
     #except Exception as e:
         #return render_template('post.html', shortcode=e)
