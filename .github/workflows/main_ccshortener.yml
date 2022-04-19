@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'CCShortener'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_949C4363C3B847F69B38148D4321545A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A3897EEDAADE4FC1BF1389F80D888190 }}
