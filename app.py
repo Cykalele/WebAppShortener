@@ -49,7 +49,7 @@ def send_form():
     else:
         return render_template('index.html')  
 
-
+'''
 @app.route("/<shortcode>", methods=['GET'])
 def router(shortcode): 
     host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
@@ -74,7 +74,7 @@ def router(shortcode):
         #return render_template('post.html', shortcode=doc['long_url'])
     #except Exception as e:
         #return render_template('post.html', shortcode=e)
-
+'''
 
 if __name__ == '__main__':
     app.run(debug=True)
