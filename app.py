@@ -49,10 +49,10 @@ def send_form():
     else:
         return render_template('index.html')  
 
-'''
+
 @app.route("/<shortcode>", methods=['GET'])
 def router(shortcode): 
-    host = "mongodb://rootadmin:edN2oY28PdkKBJA5g2skq9C7dl39Ms1NfG5RTI4ha23a1Tdl0tF1S11ml7myi7CAmwLW597hvdxM8UJI6nA69w==@rootadmin.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@rootadmin@"
+    host = "mongodb://dbccshortener:kCDuiRcuNMg8P07542yd9TbUCvWfMLMkD18zRDKgiaoA100bqEiVSx7bKGbL57v1dZlwhY1SIIcHi3OcqiXW3A==@dbccshortener.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@dbccshortener@"
     port = 10255
     mydatabase = 'DB_URLSHORTENER'
     mycollection = 'url_matching'
@@ -69,12 +69,12 @@ def router(shortcode):
     cursor = collection.find({'_id': shortcode}, {'long_url': 1})
     for doc in cursor:      
         print(type(doc['long_url'])) 
-        return redirect(doc['long_url'])
+        return render_template('post.html', shortcode=doc['long_url'])
     return
         #return render_template('post.html', shortcode=doc['long_url'])
     #except Exception as e:
         #return render_template('post.html', shortcode=e)
-'''
+
 
 if __name__ == '__main__':
     app.run(debug=True)
