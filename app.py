@@ -8,9 +8,8 @@ import random
 import requests
 from datetime import datetime
 from distutils.log import debug
-from flask import Flask, render_template, request, Blueprint,redirect, url_for, send_from_directory
+from flask import Flask, render_template, request,redirect, url_for, send_from_directory
 
-short = Blueprint('short', __name__)
 app = Flask(__name__, static_url_path="", static_folder="static")
 file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
@@ -50,7 +49,7 @@ def send_form():
         return render_template('index.html')  
 
 
-@app.route("/<shortcode>", methods=['GET'])
+@app.route("/<shortcode>")
 def router(shortcode): 
     host = "mongodb://dbccshortener:kCDuiRcuNMg8P07542yd9TbUCvWfMLMkD18zRDKgiaoA100bqEiVSx7bKGbL57v1dZlwhY1SIIcHi3OcqiXW3A==@dbccshortener.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@dbccshortener@"
     port = 10255
