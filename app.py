@@ -51,32 +51,14 @@ def send_form():
 
 @app.route("/<shortcode>")
 def router(shortcode): 
-    host = "mongodb://dbccshortener:kCDuiRcuNMg8P07542yd9TbUCvWfMLMkD18zRDKgiaoA100bqEiVSx7bKGbL57v1dZlwhY1SIIcHi3OcqiXW3A==@dbccshortener.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@dbccshortener@"
-    port = 10255
-    mydatabase = 'DB_URLSHORTENER'
-    mycollection = 'url_matching'
-    try:
-        connect = pymongo.MongoClient(host)
-        print("Connected successfully!!!")
-    except:
-        print("Could not connect to MongoDB")
-    db = connect[mydatabase]
-    print("Connected to database")
-    collection = db[mycollection]
-    print("Connected to collection")
-    
-    cursor = collection.find_one({'_id': {'$eq' : shortcode}}, {'long_url': 1})
-    for doc in cursor:      
-        print(type(doc['long_url']))    
-        long_url = doc['long_url']
-        print(long_url)
-    if(type(long_url) is str):
-        return redirect(long_url)
-    else:
-        return render_template('post.html', shortcode=long_url)
-    #except Exception as e:
-        #return render_template('post.html', shortcode=e)
-
+    API_URL = "https://apimanagementccshortener.azure-api.net/fetchDB/FetchDBTrigger"
+    header = {"Content-Type": "application/json","Ocp-Apim-Subscription-Key": "8d0c0f605b874d7dbb26f29b3a003256"}
+    sent_request = requests.post(API_URL, headers=header, json={"short_url": shortcode})
+    #sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
+    response_body = sent_request.content
+    link = response_body.decode('utf-8')
+    print(type(link))
+    return redirect(link)
 
 if __name__ == '__main__':
     app.run(debug=True)
