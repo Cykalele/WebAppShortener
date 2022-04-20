@@ -8,9 +8,9 @@ import random
 import requests
 from datetime import datetime
 from distutils.log import debug
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, Blueprint,redirect, url_for, send_from_directory
 
-
+short = Blueprint('short', __name__)
 app = Flask(__name__, static_url_path="", static_folder="static")
 file_handler = FileHandler('errorlog.txt')
 file_handler.setLevel(WARNING)
@@ -66,12 +66,15 @@ def router(shortcode):
     collection = db[mycollection]
     print("Connected to collection")
     
-    cursor = collection.find({'_id': shortcode}, {'long_url': 1})
+    cursor = collection.find_one({'_id': {'$eq' : shortcode}}, {'long_url': 1})
     for doc in cursor:      
-        print(type(doc['long_url'])) 
-        return render_template('post.html', shortcode=doc['long_url'])
-    return
-        #return render_template('post.html', shortcode=doc['long_url'])
+        print(type(doc['long_url']))    
+        long_url = doc['long_url']
+        print(long_url)
+    if(type(long_url) is str):
+        return redirect(long_url)
+    else:
+        return render_template('post.html', shortcode=long_url)
     #except Exception as e:
         #return render_template('post.html', shortcode=e)
 
