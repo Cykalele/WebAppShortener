@@ -54,7 +54,6 @@ def router(shortcode):
     API_URL = "https://apimanagementccshortener.azure-api.net/fetchDB/FetchDBTrigger"
     header = {"Content-Type": "application/json","Ocp-Apim-Subscription-Key": "8d0c0f605b874d7dbb26f29b3a003256"}
     sent_request = requests.post(API_URL, headers=header, json={"short_url": shortcode})
-    #sent_request = requests.post(HTTP_LOGIC_APP, json={"long_url": long_url, "id": id})
     response_body = sent_request.content
     link = response_body.decode('utf-8')
     print(type(link))
