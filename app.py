@@ -1,4 +1,3 @@
-import json
 from urllib import response
 from urllib.parse import urlunparse
 from urllib. request import urlopen
@@ -19,7 +18,8 @@ file_handler.setLevel(WARNING)
 def home():
     return render_template('index.html')
 
-#If Website is called through POST REQUEST (long url has been entered and sent)
+# If Website is called through POST REQUEST 
+# (long url has been entered and sent)
 @app.route("/", methods=['POST'])
 def send_form():
     id = random.randint(9999, 999999)
@@ -47,19 +47,23 @@ def send_form():
     else:
         return render_template('index.html')  
 
-# IF website is called with an shortcode behind the /, this method executes
+
+# IF website is called with an shortcode behind the /, 
+# this method executes
 @app.route("/<shortcode>")
 def router(shortcode): 
-    # Call of API MANAGEMENT to execute the azure function for getting the long url matching our short url
+    # CALL OF API MANAGEMENT to execute the azure function for getting the long url matching our short url
     API_URL = "https://apimanagementccshortener.azure-api.net/fetchDB/FetchDBTrigger"
-    header = {"Content-Type": "application/json","Ocp-Apim-Subscription-Key": "8d0c0f605b874d7dbb26f29b3a003256"}
+    header = {
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "8d0c0f605b874d7dbb26f29b3a003256"}
     sent_request = requests.post(API_URL, headers=header, json={"short_url": shortcode})
     # waiting for response of API call
     response_body = sent_request.content
     # since the content is of datatype 'byte', it is transformed to a string
     link = response_body.decode('utf-8')
     # redirect user to the long url
-    return redirect(link)
+    return redirect(link)    
 
 if __name__ == '__main__':
     app.run(debug=True)
