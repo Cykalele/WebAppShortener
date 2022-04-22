@@ -3,11 +3,11 @@
 /* ----------------------------------------------- */
 
 /* To load a config file (particles.json) you need to host this demo (MAMP/WAMP/local)... */
-
+/*
 particlesJS.load('particles-js', 'particles.json', function() {
   console.log('particles.js loaded - callback');
 });
-
+*/
 
 /* Otherwise just put the config content (json): */
 
@@ -16,10 +16,10 @@ particlesJS('particles-js',
   {
     "particles": {
       "number": {
-        "value": 60,
+        "value": 80,
         "density": {
           "enable": true,
-          "value_area": 1000
+          "value_area": 800
         }
       },
       "color": {
@@ -55,14 +55,14 @@ particlesJS('particles-js',
         "random": true,
         "anim": {
           "enable": false,
-          "speed": 30,
+          "speed": 40,
           "size_min": 0.1,
           "sync": false
         }
       },
       "line_linked": {
         "enable": true,
-        "distance": 200,
+        "distance": 150,
         "color": "#ffffff",
         "opacity": 0.4,
         "width": 1
