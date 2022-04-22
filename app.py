@@ -58,7 +58,6 @@ def router(shortcode):
     response_body = sent_request.content
     # since the content is of datatype 'byte', it is transformed to a string
     link = response_body.decode('utf-8')
-    print(type(link))
     # redirect user to the long url
     return redirect(link)
 
