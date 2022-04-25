@@ -14,7 +14,7 @@
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/bootstrap.min.css') }}">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/font-awesome.min.css') }}">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/demo.css') }}">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/templatemo-style.css') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
   
   <script type="text/javascript" src="{{ url_for('static',filename='js/modernizr.custom.86080.js') }}"></script>
 		
@@ -35,6 +35,7 @@
 			<div class="container-fluid">
 				<div class="row cb-slideshow-text-container ">
 					<div class= "tm-content col-xl-6 col-sm-8 col-xs-8 ml-auto section">
+
 						<header class="mb-5"><h1>CC SHORTENER</h1></header>
 						<P class="mb-5">A cloud computing based URL Shortener, that helps you remembering every link!</P>
 
@@ -49,6 +50,8 @@
 								</div>
 							</div>
 						</form>
+
+						<!-- This section is for displaying the error message in case the url is not valid-->
 						{% if error_url %}
 						<div class="alert alert-danger alert-dismissible" style="width: 80%">
 							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -56,13 +59,15 @@
 						</div>
 						{% endif %}
 
+						<!-- This section is for displaying the short url and long url in case everything is ok-->
 						{% if success_short_url %}
 						<div class="alert alert-success alert-dismissible" style="width: 80%">
 							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-							<strong>SHORT URL: </strong><a href="{{ success_short_url }}" >https://ccshortener.azurewebsites.net/{{ success_short_url }}</a><br>
+							<strong>SHORT URL: </strong><a href="{{ success_short_url }}" target="_blank">ccshortener.azurewebsites.net/{{ success_short_url }}</a><br>
 							<strong>LONG URL: </strong> <a href="{{ long_url }}">{{ long_url }}</a>
 						</div>
 						{% endif %}
+
 					</div>	
 				</div>	
 			</div>	

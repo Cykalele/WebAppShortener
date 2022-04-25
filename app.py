@@ -1,12 +1,6 @@
-from urllib import response
-from urllib.parse import urlunparse
-from urllib. request import urlopen
-import pymongo
 from logging import FileHandler,WARNING
 import random
 import requests
-from datetime import datetime
-from distutils.log import debug
 from flask import Flask, render_template, request,redirect, url_for, send_from_directory
 
 app = Flask(__name__, static_url_path="", static_folder="static")
